@@ -8,12 +8,20 @@ RSpec.describe Game, type: :model do
       }.to raise_error(ActiveRecord::RecordInvalid, /User must exist/)
     end
 
-    it "Columns can't be blank" do
+    it "default game state when created is new" do
       expect(create(:game).state).to match("is_new")
     end
 
-    it "Columns can't be blank" do
-      expect(create(:game).over).to match(false)
+    it "game over" do
+      game = create(:game)
+      game.won!
+      expect(game.state).to match("won")
+    end
+
+    it "game over" do
+      game = create(:game)
+      game.lost!
+      expect(game.state).to match("lost")
     end
   
   
