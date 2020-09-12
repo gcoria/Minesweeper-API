@@ -11,26 +11,46 @@ class Game < ApplicationRecord
   validates :columns, :presence => true, :numericality => {:only_integer => true, :greater_than => 0}
   validates :mines, :presence => true, :numericality => {:only_integer => true, :greater_than => 0 }
 
+  def find_cell(x,y)
+    cells.find_by(:x_axis => x, :y_axis => y)
+  end
+
   def all_cells_revealed
     cells.where(state: Model.statuses[:revealed]).count == cells.size - mines
   end
 
+  def duration
+    ended? ? (ended_at - started_at) / 60 : "still_playing"
+  end
+
+  def begin!
+    update_column(:started_at, Time.zone.now)
+    update_column(:state, "in_progress")
+  end
+
   def lost!
     update_column(:state, "lost")
-    cells.update_all(state: Cell.states[:revealed])
+    set_end_game
   end
 
   def won!
     update_column(:state, "won")
+    set_end_game
+  end
+
+  private
+
+  def ended?
+    state == "lost" || state == "won"
+  end
+
+  def set_end_game
+    update_column(:ended_at, Time.zone.now)
     cells.update_all(state: Cell.states[:revealed])
   end
 
   def set_board
     Matrix.build(rows, columns) {|row, col| cells.create(:x_axis => row, :y_axis => col)}
     cells.sample(mines).map{|c| c.set_mine}
-  end
-
-  def coords(row,column)
-    cells.find_by(:x_axis => row, :y_axis => column)
   end
 end
