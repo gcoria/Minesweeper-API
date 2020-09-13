@@ -15,8 +15,8 @@ class Game < ApplicationRecord
     cells.find_by(:x_axis => x, :y_axis => y)
   end
 
-  def all_cells_revealed
-    cells.where(state: Model.statuses[:revealed]).count == cells.size - mines
+  def all_cells_revealed?
+    cells.where(state: Cell.states[:revealed]).count == cells.size - mines
   end
 
   def duration

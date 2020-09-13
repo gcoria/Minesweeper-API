@@ -33,8 +33,9 @@ class Cell < ApplicationRecord
    			game.lost!
    		elsif game.all_cells_revealed?
    			game.won!
-   		else
-          #reveal_neighbours
+        elsif !mines_around?
+          reveal_neighbours(neighbors)
+          game.won! if game.all_cells_revealed?
    		end
     end
   end
@@ -45,7 +46,12 @@ class Cell < ApplicationRecord
 
   private
 
-  def reveal_neighbours
+  def reveal_neighbours(close_neighbors)
+    covered_neighbors = close_neighbors.select{ |neighbor|  neighbor.state == "covered"}
+    covered_neighbors.each do |cell|
+      cell.update_column(:state, "revealed")
+      reveal_neighbours(cell.neighbors) if !cell.mines_around?
+    end
   end
 
   def posible_neighbours
@@ -64,11 +70,11 @@ class Cell < ApplicationRecord
   end
 
   def start_timer
-    game.begin! if !game.started_at
+    game.begin! unless game.started_at
   end
 
-  def cell_available
-    game.in_progress? && state == "covered" || state == "flagged"
+  def cell_available?
+    game.in_progress? && (state == "covered" || state == "flagged")
   end
 
   def valid_position(vector)

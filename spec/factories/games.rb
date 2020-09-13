@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :game do
   	user factory: :user
-    columns { 1 }
-    rows { 1 }
-    mines { 1 }
+    columns { 3 }
+    rows { 3 }
+    mines { 5 }
     state { 0 }
   end
 end
