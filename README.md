@@ -5,14 +5,14 @@
 minesweeper-API is a rest api for the popular game Minesweeper.
 
 ### Game Summary
-1. Create multiple users
-2. List users
-3. Get user by id 
-4. Create new games
-5. Get a game by id
-6. Get all the games for a given user id
-7. Reveal a cell
-8. Mark a cell with a flag
+- Create multiple users
+- List users
+- Get user by id 
+- Create new games
+- Get a game by id
+- Get all the games for a given user id
+- Reveal a cell
+- Mark a cell with a flag
 
 ### Decisions
 - Games have 4 states `[is_new, in_progress, won, lost]`
@@ -27,6 +27,7 @@ minesweeper-API is a rest api for the popular game Minesweeper.
 - It uses a Postgresql to persist the users and their games
 - Game it's uploaded to heroku
 - The design was following the MVC pattern
+- Api has a [client](client.md) library
 - All classes are tested
 
 
