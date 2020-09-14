@@ -1,9 +1,8 @@
 env:
   global:
+    - CC_TEST_REPORTER_ID=6b60ac6a095c449d9ce349cb2f516090efd05aa980dd234b9e93b296f9ce5be0
 addons:
   postgresql: 9.6
-  code_climate:
-      CC_TEST_REPORTER_ID: 6b60ac6a095c449d9ce349cb2f516090efd05aa980dd234b9e93b296f9ce5be0
 after_success:
   - bundle exec codeclimate-test-reporter
 before_script:
