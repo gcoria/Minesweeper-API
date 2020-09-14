@@ -1,6 +1,6 @@
 # Minesweeper-API 
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7422b556dba761416724/maintainability)](https://codeclimate.com/github/gcoria/Minesweeper-API/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7422b556dba761416724/maintainability)](https://codeclimate.com/github/gcoria/Minesweeper-API/maintainability) [![Build Status](https://travis-ci.com/gcoria/Minesweeper-API.svg?branch=master)](https://travis-ci.com/gcoria/Minesweeper-API)
 
 minesweeper-API is a rest api for the popular game Minesweeper.
 
