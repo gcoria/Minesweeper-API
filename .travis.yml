@@ -1,11 +1,18 @@
+env:
+  global:
 addons:
   postgresql: 9.6
   code_climate:
-      repo_token: 6b60ac6a095c449d9ce349cb2f516090efd05aa980dd234b9e93b296f9ce5be0
+      CC_TEST_REPORTER_ID: 6b60ac6a095c449d9ce349cb2f516090efd05aa980dd234b9e93b296f9ce5be0
 after_success:
   - bundle exec codeclimate-test-reporter
 before_script:
   - psql -c 'create database minesweeper_api_test;' -U postgres
+  - curl -L  https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 dist: trusty
 language: ruby
 rvm:
