@@ -94,6 +94,8 @@ RSpec.describe Game, type: :model do
     it "marked cell is flagged" do
       marked_cell.mark
       expect(marked_cell.state).to match("flagged")
+      marked_cell.mark
+      expect(marked_cell.state).to match("covered")
     end
 
     it "lose game when reveal (0,0)" do
@@ -118,6 +120,29 @@ RSpec.describe Game, type: :model do
       cell_2.reveal
       cell_3.reveal
       expect(game.state).to match("won")
+    end
+  end
+
+  context 'Reveal game (4X4)' do
+    let(:game) { create(:game, columns: 4, rows: 4, mines: 3) }
+    let(:cell_revealed) { game.find_cell(3,3) }
+    let(:cell_covered) { game.find_cell(3,0) }
+    let(:cell_marked) { game.find_cell(0,3) }
+    
+    before do
+      game.cells.update_all(:mined => false, :mines_around => 0)
+      game.find_cell(0,1).set_mine   #  | c | * | r | f |
+      game.find_cell(1,0).set_mine   #  | * | c | r | r |
+      game.find_cell(2,1).set_mine   #  | c | * | r | r |
+      cell_marked.mark               #  | c | c | r | R |
+      cell_revealed.reveal             
+      game.cells.reload
+    end
+
+    it "lose game when reveal (0,0)" do
+      expect(cell_marked.state).to match("flagged")
+      expect(cell_covered.state).to match("covered")
+      expect(cell_revealed.state).to match("revealed")
     end
   end
 end
