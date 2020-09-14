@@ -1,6 +1,6 @@
 # Minesweeper-API 
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7422b556dba761416724/maintainability)](https://codeclimate.com/github/gcoria/Minesweeper-API/maintainability) [![Build Status](https://travis-ci.com/gcoria/Minesweeper-API.svg?branch=master)](https://travis-ci.com/gcoria/Minesweeper-API)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7422b556dba761416724/maintainability)](https://codeclimate.com/github/gcoria/Minesweeper-API/maintainability) [![Build Status](https://travis-ci.com/gcoria/Minesweeper-API.svg?branch=master)](https://travis-ci.com/gcoria/Minesweeper-API) [![Test Coverage](https://api.codeclimate.com/v1/badges/7422b556dba761416724/test_coverage)](https://codeclimate.com/github/gcoria/Minesweeper-API/test_coverage)
 
 minesweeper-API is a rest api for the popular game Minesweeper.
 
@@ -28,7 +28,7 @@ minesweeper-API is a rest api for the popular game Minesweeper.
 - Game it's uploaded to heroku
 - The design was following the MVC pattern
 - Api has a [client](client.md) library
-- All classes are tested
+- `97%` Test Coverage
 
 
 ### Game Site 
